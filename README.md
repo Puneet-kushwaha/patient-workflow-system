@@ -70,7 +70,7 @@ npm run dev
 
 This project uses **PostgreSQL** as the database.  
 A backup file `patient_workflow_system.backup` is included in: 
----
+backend/patient_workflow_system.backup
 
 ### Restore Database in pgAdmin 4
 1. Open **pgAdmin 4**.  
