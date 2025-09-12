@@ -8,9 +8,19 @@ require("dotenv").config();
 const basename = path.basename(__filename);
 const db = {};
 
+const isProduction = process.env.NODE_ENV === "prod";
+
 const sequelize = new Sequelize(process.env.PG_CONNECTION, {
     dialect: "postgres",
     logging: false,
+    dialectOptions: isProduction
+        ? {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        }
+        : {},
 });
 
 sequelize.authenticate()
