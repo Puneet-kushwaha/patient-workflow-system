@@ -66,7 +66,18 @@ cp .env.example .env   # Add your backend API URL
 npm run dev
 ```
 
+## 🗄️ Database Setup  
+
+This project uses **PostgreSQL** as the database.  
+A backup file `patient_workflow_system.backup` is included in: 
 ---
+
+### Restore Database in pgAdmin 4
+1. Open **pgAdmin 4**.  
+2. Right-click on **Databases → Create → Database…**  
+   - Name the database: `patient_workflow_system`  
+3. Right-click on the new database → **Restore**.  
+4. Select the backup file:
 
 ## 🔑 Environment Variables  
 
