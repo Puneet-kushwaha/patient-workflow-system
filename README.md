@@ -41,6 +41,10 @@ This platform enables patients to easily search for doctors by specialty or loca
 
 ## ⚡ Installation  
 
+### Prerequisites
+- Node.js v22.18.0  
+- PostgreSQL 17.6 
+
 ### Clone the Repository 
 ```bash
 git clone https://github.com/Puneet-kushwaha/patient-workflow-system
