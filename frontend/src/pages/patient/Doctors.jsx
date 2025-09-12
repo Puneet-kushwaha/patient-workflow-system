@@ -46,13 +46,14 @@ export default function Doctors() {
                     <h1 className={"custom-text mb-5"}>Doctors</h1>
                 </Grid>
 
-                <Grid item xs={3}>
+                <Grid item xs={12} md={6} lg={3}>
                     <TextField
+                        className={"mb-4 mb-lg-0"}
                         fullWidth
                         label="Search Doctors"
                         name="search"
                         placeholder="Search doctors by specialty or location"
-                        value={search}
+                        value={search || ""}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 </Grid>
@@ -61,7 +62,7 @@ export default function Doctors() {
             <Grid spacing={3} container>
                 {
                     doctors.map(doctor => {
-                        return <Grid item xs={4} className={"px-4 w"} display="flex" alignItems="stretch">
+                        return <Grid item xs={12} md={6} lg={4} className={"px-md-4"} display="flex" alignItems="stretch">
                             <Card style={{cursor: "pointer", width: "100%"}} onClick={() => navigate(`/doctor/${doctor.id}`)}>
                                 <CardHeader
                                     avatar={

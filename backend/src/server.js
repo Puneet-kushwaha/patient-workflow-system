@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8001;
 
 const allowedOrigins = [
     "https://patient-workflow-system-frontend.onrender.com",
-    "http://localhost:5173/",
+    "http://localhost:5173",
 ];
 
 app.use(cors({

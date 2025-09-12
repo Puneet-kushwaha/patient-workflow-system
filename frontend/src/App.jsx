@@ -7,6 +7,7 @@ import AdminDoctors from "./pages/admin/Doctors";
 import AdminPatientAppointments from "./pages/admin/PatientAppointments";
 import PatientDoctors from "./pages/patient/Doctors";
 import PatientSingleDoctor from "./pages/patient/SingleDoctor";
+import MedicalRecords from "./pages/patient/MedicalRecords";
 import MyAppointments from "./pages/patient/MyAppointments";
 import ProtectedLayout from "./components/ProtectedLayout";
 
@@ -54,6 +55,16 @@ function App() {
                     }
                 >
                     <Route path="/doctor/:id" element={<PatientSingleDoctor />} />
+                </Route>
+
+                <Route
+                    element={
+                        <ProtectedRoute role="Patient">
+                            <ProtectedLayout role="Patient" />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/medical-records/:appointmentId" element={<MedicalRecords />} />
                 </Route>
 
                 <Route

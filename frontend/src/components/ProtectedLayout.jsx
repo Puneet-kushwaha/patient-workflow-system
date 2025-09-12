@@ -68,6 +68,7 @@ const Header = () => {
 
                         <Grid>
                             <Button
+                                className={"my-3 my-md-0"}
                                 onClick={() => logout()}
                                 sx={{
                                     backgroundColor: "#e53935",

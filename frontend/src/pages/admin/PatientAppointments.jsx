@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import {Table, TableBody, TableContainer, TableHead, TableRow, Paper, TableCell, Grid, Button, Tooltip, IconButton} from '@mui/material';
 import { tableCellClasses } from '@mui/material/TableCell';
-import DoctorDialog from "../../Dialogs/DoctorDialog";
+import PatientAppointmentDialog from "../../Dialogs/PatientAppointmentDialog";
 import { get } from "../../utils/api";
 import moment from "moment";
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -31,10 +33,10 @@ function createData(name, calories, fat, carbs, protein) {
 
 export default function PatientAppointments() {
     const [appointments, setAppointments] = useState([]);
-    const [selectedDoctor, setSelectedDoctor] = useState(undefined);
-    const [openDoctorDialog, setOpenDoctorDialog] = useState(false);
+    const [metaData, setMetaData] = useState({});
+    const [openPatientAppointmentDialog, setOpenPatientAppointmentDialog] = useState(false);
 
-    const getAllDoctors = async () => {
+    const getAllAppointments = async () => {
         try{
             const {type, data: {appointments}} = await get("/admin/patient-appointments");
             if(type === "success"){
@@ -45,18 +47,23 @@ export default function PatientAppointments() {
         }
     }
 
-    const onCloseDoctorDialog = () => {
-        setOpenDoctorDialog(false);
-        setSelectedDoctor(undefined);
+    const onClosePatientAppointmentDialog = () => {
+        setOpenPatientAppointmentDialog(false);
+        setMetaData({});
     };
 
     useEffect(() => {
-        getAllDoctors();
+        getAllAppointments();
     }, []);
 
     return (
         <div className={"p-2"}>
-            <DoctorDialog open={openDoctorDialog} onClose={onCloseDoctorDialog} selectedDoctor={selectedDoctor} getAllDoctors={getAllDoctors} />
+            <PatientAppointmentDialog
+                open={openPatientAppointmentDialog}
+                onClose={onClosePatientAppointmentDialog}
+                metaData={metaData}
+                getAllAppointments={getAllAppointments}
+            />
 
             <Grid container justifyContent={"space-between"} alignItems={"center"}>
                 <Grid item>
@@ -68,7 +75,6 @@ export default function PatientAppointments() {
                     <TableHead>
                         <TableRow sx={{ backgroundColor: '#090909' }}>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Patient Name</StyledTableCell>
-                            <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Patient Email</StyledTableCell>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Doctor Name</StyledTableCell>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Doctor Specialty</StyledTableCell>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Doctor location</StyledTableCell>
@@ -76,6 +82,7 @@ export default function PatientAppointments() {
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Time</StyledTableCell>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Status</StyledTableCell>
                             <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Notes</StyledTableCell>
+                            <StyledTableCell sx={{ fontWeight: 'bold', color: "#fff" }}>Actions</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -85,7 +92,6 @@ export default function PatientAppointments() {
                                 <StyledTableCell component="th" scope="row">
                                     {patient.name}
                                 </StyledTableCell>
-                                <StyledTableCell>{patient.email}</StyledTableCell>
                                 <StyledTableCell>{doctor.name}</StyledTableCell>
                                 <StyledTableCell>{doctor.specialty}</StyledTableCell>
                                 <StyledTableCell>{doctor.location}</StyledTableCell>
@@ -93,6 +99,28 @@ export default function PatientAppointments() {
                                 <StyledTableCell>{time}</StyledTableCell>
                                 <StyledTableCell>{status}</StyledTableCell>
                                 <StyledTableCell>{notes}</StyledTableCell>
+                                <StyledTableCell>
+                                    <Tooltip title="Add Medical Record">
+                                        <IconButton
+                                            onClick={() => {
+                                                setOpenPatientAppointmentDialog(true);
+                                                setMetaData({
+                                                    appointment,
+                                                    appointmentId: appointment.id,
+                                                    patientId: patient.id,
+                                                    doctorId: doctor.id
+                                                });
+                                            }}
+                                            aria-label="edit" style={{ padding: '6px', color: "green" }}>
+                                            <AddIcon fontSize="medium" style={{fontSize: "30px", fontWeight: "bold"}}/>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Delete">
+                                        <IconButton onClick={() => {}} aria-label="delete" style={{ padding: '6px', color: "#f00" }}>
+                                            <DeleteIcon fontSize="medium" />
+                                        </IconButton>
+                                    </Tooltip>
+                                </StyledTableCell>
                             </StyledTableRow>
                         })}
                     </TableBody>

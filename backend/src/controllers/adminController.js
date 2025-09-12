@@ -1,4 +1,4 @@
-const { Doctor, Appointment, User } = require("../models");
+const { Doctor, Appointment, User, MedicalRecord } = require("../models");
 const fs = require("fs");
 const path = require("path");
 
@@ -194,6 +194,59 @@ exports.getAppointments = async (req, res) => {
             type: "error",
             message: "Server error while fetching appointments",
             data: { error: error.message },
+        });
+    }
+};
+
+exports.addMedicalRecord = async (req, res) => {
+    try {
+        const { diagnosis, prescription, attachments, status, appointmentId, doctorId, patientId } = req.body;
+
+        const appointment = await Appointment.findByPk(appointmentId);
+        if (!appointment) {
+            return res.status(404).json({
+                type: "error",
+                message: "Appointment not found"
+            });
+        }
+
+        let attachmentsPath = "";
+
+        if (attachments?.type) {
+            const file = attachments;
+
+            const uploadDir = path.join(__dirname, "..", "..", "uploads", "patient", "attachments");
+
+            fs.mkdirSync(uploadDir, { recursive: true });
+
+            const fileName = Date.now() + "-" + file.name;
+            const filePath = path.join(uploadDir, fileName);
+
+            fs.copyFileSync(file.path, filePath);
+            fs.unlinkSync(file.path);
+
+            attachmentsPath = `/uploads/patient/attachments/${fileName}`;
+        }
+
+        const medicalRecord = await MedicalRecord.create({
+            ...req.body,
+            attachments: attachmentsPath
+        });
+
+        await appointment.update({
+            status
+        });
+
+        return res.status(200).json({
+            type: "success",
+            message: "Medical Record Added Successfully",
+            data: {medicalRecord}
+        });
+    } catch (error) {
+        return res.status(500).json({
+            type: "error",
+            message: "Server error while updating doctor",
+            data: {error: error.message}
         });
     }
 };

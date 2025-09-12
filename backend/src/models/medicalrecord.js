@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.TEXT,
         },
         attachments: {
-          type: DataTypes.JSON,
+          type: DataTypes.TEXT,
         },
       },
       {

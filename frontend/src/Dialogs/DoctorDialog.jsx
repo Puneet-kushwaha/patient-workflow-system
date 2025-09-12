@@ -8,8 +8,13 @@ import {
     Button,
     Grid,
     Avatar,
+    Slide
 } from "@mui/material";
 import { post, put } from "../utils/api";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
     const [formData, setFormData] = useState({
@@ -95,19 +100,24 @@ const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
     }, [selectedDoctor]);
 
     return (
-        <Dialog open={open} onClose={() => {
-            onClose();
-            setError("");
-            if(selectedDoctor)
-                setFormData({
-                    name: "",
-                    specialty: "",
-                    location: "",
-                    bio: "",
-                    profilePicture: null,
-                });
-            setPreview(null);
-        }} fullWidth>
+        <Dialog
+            TransitionComponent={Transition}
+            keepMounted
+            aria-describedby="alert-dialog-slide-description"
+            open={open}
+            onClose={() => {
+                onClose();
+                setError("");
+                if(selectedDoctor)
+                    setFormData({
+                        name: "",
+                        specialty: "",
+                        location: "",
+                        bio: "",
+                        profilePicture: null,
+                    });
+                setPreview(null);
+            }} fullWidth>
             <DialogTitle>
                 <Grid container justifyContent={"space-between"} alignItems={"center"}>
                     <Grid item>
@@ -144,7 +154,7 @@ const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
                                     fullWidth
                                     label="Name"
                                     name="name"
-                                    value={formData.name}
+                                    value={formData.name || ""}
                                     onChange={handleChange}
                                     sx={{ mt: 2 }}
                                     required
@@ -165,7 +175,7 @@ const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
                             fullWidth
                             label="Specialty"
                             name="specialty"
-                            value={formData.specialty}
+                            value={formData.specialty || ""}
                             onChange={handleChange}
                             required
                         />
@@ -176,7 +186,7 @@ const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
                             fullWidth
                             label="Location"
                             name="location"
-                            value={formData.location}
+                            value={formData.location || ""}
                             onChange={handleChange}
                             required
                         />
@@ -189,7 +199,7 @@ const DoctorDialog = ({ open, onClose, selectedDoctor, getAllDoctors }) => {
                             minRows={3}
                             label="Bio"
                             name="bio"
-                            value={formData.bio}
+                            value={formData.bio || ""}
                             onChange={handleChange}
                             required
                         />

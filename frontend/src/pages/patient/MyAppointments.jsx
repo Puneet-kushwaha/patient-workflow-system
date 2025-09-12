@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     Grid,
     Card, CardHeader, CardContent,
-    Avatar, Typography, TextField
+    Avatar, Typography, TextField, Button
 } from '@mui/material';
 import { get } from "../../utils/api";
 import { red } from "@mui/material/colors";
@@ -13,7 +13,6 @@ export default function MyAppointments() {
     const navigate = useNavigate();
 
     const [appointments, setAppointments] = useState([]);
-    const [search, setSearch] = useState("");
 
     const getAllAppointments = async () => {
         try{
@@ -47,7 +46,7 @@ export default function MyAppointments() {
                 {
                     appointments.map(appointment => {
                         const doctor = appointment.doctor || {};
-                        return <Grid item xs={3} className={"px-4"} display="flex" alignItems="stretch">
+                        return <Grid item xs={12} md={6} lg={4} className={"px-md-4"} display="flex" alignItems="stretch">
                             <Card style={{cursor: "pointer"}}>
                                 <CardHeader
                                     avatar={
@@ -69,7 +68,7 @@ export default function MyAppointments() {
                                         <Grid item>
                                             <div>
                                                 <Typography variant={"h6"}>Date</Typography>
-                                                <h6 className={"custom-text mb-4"}>{moment(appointment.date).format("DD-MMM-YYYY")}</h6>
+                                                <h6 className={"custom-text mb-4"}>{moment(appointment.date).format("DD MMM YYYY")}</h6>
                                             </div>
                                         </Grid>
 
@@ -85,7 +84,9 @@ export default function MyAppointments() {
                                         <Grid item>
                                             <div>
                                                 <Typography variant={"h6"}>Status</Typography>
-                                                <h6 className={"custom-text mb-4"}>{appointment.status}</h6>
+                                                <Button variant={"contained"}>
+                                                    {appointment.status}
+                                                </Button>
                                             </div>
                                         </Grid>
 
@@ -96,6 +97,15 @@ export default function MyAppointments() {
                                             </div>
                                         </Grid>
                                     </Grid>
+
+                                    <div className={"text-center mt-4"}>
+                                        <button
+                                            className={"custom-btn"}
+                                            onClick={() => navigate(`/medical-records/${appointment.id}`)}
+                                        >
+                                            View Medical Records
+                                        </button>
+                                    </div>
 
                                 </CardContent>
                             </Card>

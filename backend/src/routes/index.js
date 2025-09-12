@@ -13,12 +13,14 @@ router.get("/admin/doctors", auth(["Admin"]), adminController.getAllDoctors);
 router.put("/admin/doctor/:id", auth(["Admin"]), adminController.updateDoctor);
 router.delete("/admin/doctor/:id", auth(["Admin"]), adminController.deleteDoctor);
 router.get("/admin/patient-appointments", auth(["Admin"]), adminController.getAppointments);
+router.post("/admin/add-medical-record", auth(["Admin"]), adminController.addMedicalRecord);
 
 
 router.get("/doctors", auth(["Patient"]), patientController.getAllDoctors);
 router.get("/doctor/:id", auth(["Patient"]), patientController.getDoctorById);
 router.post("/book-appointment", auth(["Patient"]), patientController.bookAppointment);
 router.get("/appointments", auth(["Patient"]), patientController.getAppointments);
+router.get("/medical-records/:appointmentId", auth(["Patient"]), patientController.getMedicalRecords);
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { Doctor, Appointment } = require("../models");
+const { Doctor, Appointment, MedicalRecord } = require("../models");
 const { Op } = require("sequelize");
 
 exports.getAllDoctors = async (req, res) => {
@@ -55,6 +55,7 @@ exports.getDoctorById = async (req, res) => {
             appointments = await Appointment.findAll({
                 where: {
                     doctorId: id,
+                    status: "Scheduled",
                     date: {
                         [Op.between]: [startOfDay, endOfDay],
                     },
@@ -127,6 +128,31 @@ exports.getAppointments = async (req, res) => {
             type: "error",
             message: "Server error while fetching appointments",
             data: { error: error.message },
+        });
+    }
+};
+
+exports.getMedicalRecords = async (req, res) => {
+    try {
+        const { appointmentId } = req.params;
+        const { appointments: dateFilter } = req.query;
+        const medicalRecords = await MedicalRecord.findAll({
+            where: {appointmentId},
+             order: [["createdAt", "DESC"]]
+        });
+
+        return res.status(200).json({
+            type: "success",
+            message: "",
+            data: {
+                medicalRecords
+            }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            type: "error",
+            message: "Server error while fetching doctor",
+            data: {error: error.message},
         });
     }
 };

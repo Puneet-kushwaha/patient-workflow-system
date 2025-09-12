@@ -59,13 +59,13 @@ export default function SingleDoctor() {
     return (
         <div className={"p-2"}>
             <Grid container justifyContent={"space-between"} alignItems={"center"}>
-                <Grid item>
+                <Grid item xs={12}>
                     <h1 className={"custom-text mb-4"}>Doctor Details</h1>
                 </Grid>
             </Grid>
 
             <Grid container spacing={3}>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <img
                         style={{
                             width: "460px",
@@ -74,7 +74,7 @@ export default function SingleDoctor() {
                         src={import.meta.env.VITE_BACKEND_URL + doctor.profilePicture} />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} md={6} lg={8}>
                     <div>
                         <h4 className={"custom-text mt-4"}>Name</h4>
                         <Typography variant={"h6"}>{doctor.name}</Typography>
@@ -102,7 +102,7 @@ export default function SingleDoctor() {
                     <h2 className={"custom-text mt-5 mb-1"}>Book Appointment</h2>
                 </Grid>
 
-                <Grid item xs={3}>
+                <Grid item xs={12} md={6} lg={3}>
                     <h5 className={"mb-3"}>Select Date</h5>
                     <DatePicker
                         className={"w-100"}
@@ -120,12 +120,12 @@ export default function SingleDoctor() {
                         minRows={5}
                         label="Notes"
                         name="notes"
-                        value={slotDateTime?.notes}
+                        value={slotDateTime?.notes || ""}
                         onChange={(e) => setSlotDateTime({...slotDateTime, notes: e.target.value})}
                     />
                 </Grid>
 
-                <Grid item xs={9}>
+                <Grid item xs={12} md={6} lg={9}>
                     <h5 className={"mb-3"}>Select Time Slot</h5>
                     <Grid container spacing={3}>
                         {
@@ -141,7 +141,7 @@ export default function SingleDoctor() {
                                 "5 PM - 6 PM",
                                 "6 PM - 7 PM"
                             ].map(time => {
-                                return <Grid item xs={3}>
+                                return <Grid item xs={12} md={6} lg={3}>
                                     {
                                         <Button
                                             className="p-3"
@@ -168,7 +168,7 @@ export default function SingleDoctor() {
 
                         <Grid item>
                             <button
-                                className={"custom-btn ml-5"}
+                                className={"custom-btn ml-lg-5"}
                                 onClick={() => bookSlot()}
                             >
                                 Confirm Booking

@@ -54,8 +54,15 @@ const Login = () => {
             backgroundPosition: "center"
           }}></Grid>
           <Grid xs={5} className={""}>
-            <div className={""}>
-              <h1 className={"custom-text mb-5 text-center"}>Patient Workflow System</h1>
+            <div className={"text-center"}>
+              <img
+                  className={"mb-3"}
+                  style={{
+                    width: "170px",
+                    height: "50px"
+                  }}
+                  src={"/images/logo.png"} />
+              <h1 className={"custom-text mb-4 text-center"}>Patient Workflow System</h1>
 
               <Typography variant="h4" align="center" gutterBottom>
                 Welcome Back
@@ -72,7 +79,7 @@ const Login = () => {
                       fullWidth
                       margin="normal"
                       type="email"
-                      value={email}
+                      value={email || ""}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                   />
@@ -82,7 +89,7 @@ const Login = () => {
                       fullWidth
                       margin="normal"
                       type={showPassword ? "text" : "password"}
-                      value={password}
+                      value={password || ""}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       InputProps={{
