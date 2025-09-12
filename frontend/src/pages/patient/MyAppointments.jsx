@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     Grid,
     Card, CardHeader, CardContent,
-    Avatar, Typography, TextField, Button
+    Avatar, Typography, Stack, Button, Chip
 } from '@mui/material';
 import { get } from "../../utils/api";
 import { red } from "@mui/material/colors";
@@ -84,9 +84,15 @@ export default function MyAppointments() {
                                         <Grid item>
                                             <div>
                                                 <Typography variant={"h6"}>Status</Typography>
-                                                <Button variant={"contained"}>
-                                                    {appointment.status}
-                                                </Button>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Chip label={appointment.status}
+                                                          color={
+                                                              appointment.status === "Completed" ? "success" :
+                                                                  appointment.status === "Scheduled" ? "primary" :
+                                                                      appointment.status === "Cancelled" ? "error" : undefined
+                                                          }
+                                                    />
+                                                </Stack>
                                             </div>
                                         </Grid>
 

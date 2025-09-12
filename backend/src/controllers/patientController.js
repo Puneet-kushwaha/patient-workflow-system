@@ -135,17 +135,19 @@ exports.getAppointments = async (req, res) => {
 exports.getMedicalRecords = async (req, res) => {
     try {
         const { appointmentId } = req.params;
-        const { appointments: dateFilter } = req.query;
         const medicalRecords = await MedicalRecord.findAll({
             where: {appointmentId},
-             order: [["createdAt", "DESC"]]
+            order: [["createdAt", "DESC"]]
         });
+
+        const appointment = await Appointment.findByPk(appointmentId);
 
         return res.status(200).json({
             type: "success",
             message: "",
             data: {
-                medicalRecords
+                medicalRecords,
+                appointment
             }
         });
     } catch (error) {
