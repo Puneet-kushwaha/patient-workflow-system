@@ -1,0 +1,96 @@
+:root{
+    --primary-color: #059bbc;
+    --secondary-color: #FFD700;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none !important;
+}
+
+.custom-text {
+    font-weight: 900;
+    color: var(--primary-color);
+    --x-offset: -0.0625em;
+    --y-offset: 0.0625em;
+    --stroke: 0.060em;
+    --background-color: white;
+    --stroke-color: var(--secondary-color);
+
+    text-shadow:
+
+            var(--x-offset)
+            var(--y-offset)
+            0px
+            var(--background-color),
+
+            calc( var(--x-offset) - var(--stroke) )
+            calc( var(--y-offset) + var(--stroke) )
+            0px
+            var(--stroke-color);
+
+}
+
+@supports ( text-shadow: 1px 1px 1px 1px black ) {
+    .custom-text {
+        text-shadow:
+
+                var(--x-offset)
+                var(--y-offset)
+                0px
+                0px
+                var(--background-color),
+
+                var(--x-offset)
+                var(--y-offset)
+                var(--stroke)
+                0px
+                var(--stroke-color);
+
+    }
+}
+
+.custom-btn {
+    appearance: none;
+    background-color: #FFFFFF;
+    border-radius: 40em;
+    border-style: none;
+    box-shadow: var(--secondary-color) 1px -8px 18px inset;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -.24px;
+    margin: 0 0 10px 0;
+    outline: none !important;
+    padding: 1rem 1.3rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.custom-btn:hover {
+    background-color: var(--primary-color);
+    box-shadow: #086174 0 -6px 8px inset;
+    transform: scale(1.125);
+    color: #fff
+}
+
+.custom-btn:active {
+    transform: scale(1.025);
+}
+
+@media (min-width: 768px) {
+    .custom-btn {
+        font-size: 1.2rem;
+        padding: .75rem 2rem;
+    }
+}
