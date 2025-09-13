@@ -63,7 +63,7 @@ export default function MedicalRecords() {
     };
 
     return (
-        <div className={"p-2"}>
+        <div className={"p-md-2"}>
 
             <Grid container justifyContent={"space-between"} alignItems={"start"}>
                 <Grid item>
@@ -75,21 +75,21 @@ export default function MedicalRecords() {
                 data.length === 0 && <h4 className={"text-center"}>No Records Found</h4>
             }
 
-            <Grid component={Paper} elevation={3} className={"p-4 mb-4"}>
+            <Grid component={Paper} elevation={3} className={"p-2 p-lg-4 mb-4"}>
                 <Grid container>
                     <Grid item xs={12}>
                         <Typography variant={"h5"} className={"mb-3"}>Appointment Details</Typography>
                     </Grid>
 
-                    <Grid item xs={6} md={4} lg={3}>
+                    <Grid item xs={12} md={4} lg={3}>
                         <p className={"font-weight-bold m-0"}>Date: {moment(appointment.date).format("DD MMM YYYY")}</p>
                     </Grid>
 
-                    <Grid item xs={6} md={4} lg={3}>
+                    <Grid item xs={12} md={4} lg={3}>
                         <p className={"font-weight-bold m-0"}>Time Slot: {appointment.time}</p>
                     </Grid>
 
-                    <Grid item xs={6} md={4} lg={3}>
+                    <Grid item xs={12} md={4} lg={3}>
                         <p className={"font-weight-bold m-0"}>Status: {appointment.status}</p>
                     </Grid>
                 </Grid>

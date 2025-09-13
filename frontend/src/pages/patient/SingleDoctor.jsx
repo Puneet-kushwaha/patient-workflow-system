@@ -65,8 +65,9 @@ export default function SingleDoctor() {
             </Grid>
 
             <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} lg={4}>
                     <img
+                        className={"img-fluid"}
                         style={{
                             width: "460px",
                             height: "460px",
@@ -74,7 +75,7 @@ export default function SingleDoctor() {
                         src={import.meta.env.VITE_BACKEND_URL + doctor.profilePicture} />
                 </Grid>
 
-                <Grid item xs={12} md={6} lg={8}>
+                <Grid item xs={12} lg={8}>
                     <div>
                         <h4 className={"custom-text mt-4"}>Name</h4>
                         <Typography variant={"h6"}>{doctor.name}</Typography>

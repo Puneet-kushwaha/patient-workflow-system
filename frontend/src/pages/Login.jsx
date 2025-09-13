@@ -47,16 +47,16 @@ const Login = () => {
   return (
       <>
         <Grid container sx={{ minHeight: "100vh" }} alignItems={"center"}>
-          <Grid xs={7} style={{
+          <Grid xs={12} lg={7} order={{ xs: 2, lg: 1 }} style={{
             backgroundImage: `url(/images/doctor-bg.jpg)`,
             height: "100vh",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}></Grid>
-          <Grid xs={5} className={""}>
+          <Grid xs={12} lg={5} order={{ xs: 1, lg: 2 }} className={"p-4 p-xl-0"}>
             <div className={"text-center"}>
               <img
-                  className={"mb-3"}
+                  className={"mb-3 img-fluid"}
                   style={{
                     width: "170px",
                     height: "50px"
@@ -71,8 +71,8 @@ const Login = () => {
                 Please login to your account
               </Typography>
 
-              <div className={"px-5"}>
-                <Box component="form" onSubmit={handleLogin} sx={{ mt: 2 }} className={"px-5"}>
+              <div className={"px-md-5"}>
+                <Box component="form" onSubmit={handleLogin} sx={{ mt: 2 }} className={"px-md-5"}>
                   <TextField
                       label="Email"
                       variant="outlined"

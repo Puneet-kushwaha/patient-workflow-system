@@ -199,6 +199,7 @@ const PatientAppointmentDialog = ({ open, onClose, metaData, getAllAppointments 
                                 />
                             ) : file.type.startsWith("image/") ? (
                                 <img
+                                    className={"img-fluid"}
                                     src={previewUrl}
                                     alt={file.name}
                                     style={{ maxWidth: "100%", maxHeight: "200px" }}
