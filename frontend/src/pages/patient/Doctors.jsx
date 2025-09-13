@@ -63,28 +63,41 @@ export default function Doctors() {
                 {
                     doctors.map(doctor => {
                         return <Grid item xs={12} md={6} lg={4} className={"px-md-4"} display="flex" alignItems="stretch">
-                            <Card style={{cursor: "pointer", width: "100%"}} onClick={() => navigate(`/doctor/${doctor.id}`)}>
-                                <CardHeader
-                                    avatar={
-                                        <Avatar
-                                            className={""}
-                                            src={import.meta.env.VITE_BACKEND_URL + doctor.profilePicture}
-                                            sx={{ width: "100px", height: "100px", bgcolor: "#c9c7c7" }}
-                                        >R</Avatar>
-                                    }
-                                    title={<h4 className={"custom-text"}>{doctor.name}</h4>}
-                                    subheader={
-                                        <>
-                                            <Typography variant="body1">{doctor.specialty}</Typography>
-                                            <Typography variant="body1">{doctor.location}</Typography>
-                                        </>
-                                    }
-                                />
-                                <CardContent>
-                                    <Typography variant="h6" color="text.secondary">
-                                        {doctor.bio}
-                                    </Typography>
-                                </CardContent>
+                            <Card style={{width: "100%"}}>
+                                <Grid container className={"h-100"} justifyContent={"center"} alignItems={"space-between"}>
+                                    <Grid item>
+                                        <CardHeader
+                                            avatar={
+                                                <Avatar
+                                                    className={""}
+                                                    src={import.meta.env.VITE_BACKEND_URL + doctor.profilePicture}
+                                                    sx={{ width: "100px", height: "100px", bgcolor: "#c9c7c7" }}
+                                                >R</Avatar>
+                                            }
+                                            title={<h4 className={"custom-text"}>{doctor.name}</h4>}
+                                            subheader={
+                                                <>
+                                                    <Typography variant="body1">{doctor.specialty}</Typography>
+                                                    <Typography variant="body1">{doctor.location}</Typography>
+                                                </>
+                                            }
+                                        />
+                                        <CardContent>
+                                            <Typography variant="h6" color="text.secondary">
+                                                {doctor.bio}
+                                            </Typography>
+                                        </CardContent>
+                                    </Grid>
+
+                                    <Grid item style={{alignSelf: "end"}}>
+                                        <button
+                                            className={"custom-btn mb-4"}
+                                            onClick={() => navigate(`/doctor/${doctor.id}`)}
+                                        >
+                                            Book Appointment
+                                        </button>
+                                    </Grid>
+                                </Grid>
                             </Card>
                         </Grid>
                     })

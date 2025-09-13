@@ -38,7 +38,7 @@ const Header = () => {
                     }}>
                         <Grid>
                             <img
-                                className={"img-fluid"}
+                                className={"img-fluid mt-2 mt-md-0"}
                                 style={{
                                     width: "170px",
                                     height: "50px"
