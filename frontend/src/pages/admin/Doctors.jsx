@@ -54,7 +54,7 @@ export default function Doctors() {
 
     const handleDelete = (doctor) => {
         Swal.fire({
-            title: `Are you sure you want to delete Dr. ${doctor.name}?`,
+            title: `Are you sure you want to delete ${doctor.name}?`,
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,

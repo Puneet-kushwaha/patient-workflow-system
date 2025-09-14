@@ -37,13 +37,13 @@ const Header = () => {
                         alignItems: "center",
                     }}>
                         <Grid>
-                            <img
+                            <a href={"/"}><img
                                 className={"img-fluid mt-2 mt-md-0"}
                                 style={{
                                     width: "170px",
                                     height: "50px"
                                 }}
-                                src={"/images/logo.png"} />
+                                src={"/images/logo.png"} /></a>
                         </Grid>
 
                         <Grid>
