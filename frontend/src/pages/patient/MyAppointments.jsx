@@ -47,7 +47,7 @@ export default function MyAppointments() {
                     appointments.map(appointment => {
                         const doctor = appointment.doctor || {};
                         return <Grid item xs={12} md={6} lg={4} className={"px-md-4"} display="flex" alignItems="stretch">
-                            <Card style={{cursor: "pointer"}}>
+                            <Card style={{width: "100%"}}>
                                 <CardHeader
                                     avatar={
                                         <Avatar
@@ -63,7 +63,7 @@ export default function MyAppointments() {
                                         </>
                                     }
                                 />
-                                <CardContent>
+                                <CardContent className={"px-md-5"}>
                                     <Grid container justifyContent={"space-between"}>
                                         <Grid item>
                                             <div>
