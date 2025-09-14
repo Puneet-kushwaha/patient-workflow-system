@@ -100,26 +100,22 @@ export default function PatientAppointments() {
                                 <StyledTableCell>{status}</StyledTableCell>
                                 <StyledTableCell>{notes}</StyledTableCell>
                                 <StyledTableCell>
-                                    <Tooltip title="Add Medical Record">
-                                        <IconButton
-                                            onClick={() => {
-                                                setOpenPatientAppointmentDialog(true);
-                                                setMetaData({
-                                                    appointment,
-                                                    appointmentId: appointment.id,
-                                                    patientId: patient.id,
-                                                    doctorId: doctor.id
-                                                });
-                                            }}
-                                            aria-label="edit" style={{ padding: '6px', color: "green" }}>
-                                            <AddIcon fontSize="medium" style={{fontSize: "30px", fontWeight: "bold"}}/>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Tooltip title="Delete">
-                                        <IconButton onClick={() => {}} aria-label="delete" style={{ padding: '6px', color: "#f00" }}>
-                                            <DeleteIcon fontSize="medium" />
-                                        </IconButton>
-                                    </Tooltip>
+
+                                    <Button
+                                        size={"small"}
+                                        onClick={() => {
+                                            setOpenPatientAppointmentDialog(true);
+                                            setMetaData({
+                                                appointment,
+                                                appointmentId: appointment.id,
+                                                patientId: patient.id,
+                                                doctorId: doctor.id
+                                            });
+                                        }}
+                                        variant={"contained"}
+                                    >
+                                        Add Record
+                                    </Button>
                                 </StyledTableCell>
                             </StyledTableRow>
                         })}
